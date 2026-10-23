@@ -459,6 +459,15 @@
       .page-head > button {
         flex-shrink: 0;
       }
+      .lesson-nav-actions {
+        display: flex;
+        flex: 0 1 auto;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 4px 10px;
+      }
+      .lesson-nav-actions .text-btn { min-height: 42px; }
       .eyebrow {
         display: inline-flex;
         align-items: center;
@@ -505,6 +514,87 @@
         font: 400 10px/1.5 var(--font-mono);
         letter-spacing: 0.08em;
         text-transform: uppercase;
+      }
+
+      /* New study surfaces: compact enough for a 30-minute routine, but
+         still consistent with the original learning-tool vocabulary. */
+      .memory-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: var(--muted);
+        color: var(--muted-foreground);
+        font-size: 10px;
+        line-height: 1.4;
+      }
+      .memory-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+      .memory-badge.is-new { color: #8b5e00; background: #fff8e5; }
+      .memory-badge.is-learning { color: #9b4d12; background: #fff2e8; }
+      .memory-badge.is-familiar { color: #1d6a56; background: #edf8f1; }
+      .memory-badge.is-stable { color: #2459b5; background: #edf3ff; }
+      .memory-badge.is-mastered { color: #6043a5; background: #f3efff; }
+      .word-card { cursor: default; }
+      .word-card-clickable { cursor: pointer; }
+      .word-card-clickable:hover { border-color: #0052ff45; box-shadow: var(--shadow-accent); transform: translateY(-2px); }
+      .word-card-context {
+        margin: 12px 0 0;
+        color: var(--muted-foreground);
+        font-size: 11px;
+        line-height: 1.7;
+      }
+      .word-card-context strong { color: var(--foreground); font-weight: 600; }
+      .word-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+      .word-card-actions button { min-height: 36px; }
+      .selection-popover {
+        position: fixed;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px;
+        border: 1px solid #0052ff35;
+        border-radius: 12px;
+        background: var(--card);
+        box-shadow: var(--shadow-accent);
+      }
+      .selection-popover[hidden] { display: none; }
+      .selection-popover span { max-width: 170px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--muted-foreground); font-size: 11px; }
+      .daily-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .daily-card { padding: 19px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow-sm); }
+      .daily-card.is-done { border-color: #17664955; background: var(--success-soft); }
+      .daily-card h3 { margin: 10px 0 5px; font-size: 17px; }
+      .daily-card p { margin: 0; color: var(--muted-foreground); font-size: 12px; line-height: 1.75; }
+      .daily-card .backup-row { margin-top: 14px; }
+      .daily-choice-row { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+      .daily-choice { flex: 1 1 150px; min-height: 48px; padding: 10px 13px; border: 1px solid var(--border); border-radius: 11px; background: var(--background); text-align: left; }
+      .daily-choice:hover, .daily-choice:focus-visible { border-color: #0052ff66; background: var(--accent-soft); }
+      .voice-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(120px, .6fr)) auto; gap: 10px; align-items: end; }
+      .voice-field { display: grid; gap: 6px; color: var(--muted-foreground); font-size: 11px; }
+      .voice-field select, .voice-field input { width: 100%; min-height: 44px; }
+      .voice-status { margin-top: 12px; padding: 11px 13px; border-radius: 10px; background: var(--muted); color: var(--muted-foreground); font-size: 11px; }
+      .voice-status.is-ready { background: var(--success-soft); color: var(--success); }
+      .word-detail-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, .72fr); gap: 18px; }
+      .word-detail-hero { padding: 30px; border: 1px solid #0052ff22; border-radius: var(--radius); background: linear-gradient(135deg, #fff, #f2f6ff); box-shadow: var(--shadow-accent); }
+      .word-detail-hero .word-italian { font-size: clamp(31px, 4vw, 48px); }
+      .word-detail-hero .word-chinese { font-size: 16px; }
+      .word-detail-hero .backup-row { margin-top: 18px; }
+      .word-example { margin: 16px 0 0; padding: 15px; border-left: 3px solid var(--accent); background: #0052ff08; }
+      .word-example p { margin: 0; line-height: 1.8; }
+      .word-example p + p { margin-top: 5px; color: var(--muted-foreground); font-size: 12px; }
+      .word-practice { display: grid; gap: 11px; }
+      .word-practice .note-field { min-height: 112px; }
+      .selection-source { color: var(--muted-foreground); font-size: 11px; }
+      @media (max-width: 760px) {
+        .daily-grid, .word-detail-grid, .voice-grid { grid-template-columns: 1fr; }
+        .voice-field input[type="range"] { width: 100%; }
       }
 
       .study-overview {
@@ -764,7 +854,7 @@
       .waveform i:nth-child(3) {
         height: 30px;
       }
-      .daily-card {
+      .hero-art .daily-card {
         right: -4px;
         bottom: 33px;
         display: flex;
@@ -784,16 +874,16 @@
         background: var(--gradient);
         color: #fff;
       }
-      .daily-card strong {
+      .hero-art .daily-card strong {
         display: block;
         font: 600 20px/1.2 var(--font-body);
         letter-spacing: -0.04em;
       }
-      .daily-card strong span {
+      .hero-art .daily-card strong span {
         font-size: 12px;
         font-weight: 400;
       }
-      .daily-card small {
+      .hero-art .daily-card small {
         display: block;
         margin-top: 5px;
         color: var(--muted-foreground);
@@ -3191,6 +3281,7 @@
       </div>
     </div>
     <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <div class="selection-popover" id="selectionPopover" hidden><span id="selectedTextPreview"></span><button type="button" class="primary-btn" data-action="capture-selection">加入单词库</button></div>
     <input type="file" id="importFile" accept=".json,application/json" hidden />
     <script>
       const units = [
@@ -6195,7 +6286,7 @@
         return clean;
       }
       function repetitionPlan(old, rating, now = Date.now()) {
-        const quality = { again: 1, familiar: 3, known: 5 }[rating];
+        const quality = { again: 1, hard: 2, familiar: 3, known: 5 }[rating];
         if (quality == null) return null;
         const previousEase = Number.isFinite(old.ease) ? old.ease : 2.5;
         const ease = Math.max(
@@ -6207,9 +6298,11 @@
         );
         const streak = quality < 3 ? 0 : (old.streak || 0) + 1;
         const interval =
-          quality < 3
+          rating === "again"
             ? 10 / 1440
-            : streak === 1
+            : rating === "hard"
+              ? Math.max(0.5, Math.min(1, (old.interval || 1) * 0.35))
+              : streak === 1
               ? 1
               : streak === 2
                 ? quality === 3
@@ -6251,8 +6344,10 @@
       }
       function reviewIntervalLabel(id, rating) {
         const plan = repetitionPlan(state.words[id] || {}, rating);
+        if (plan.interval < 0.05)
+          return Math.round(plan.interval * 1440) + " 分钟";
         return plan.interval < 1
-          ? Math.round(plan.interval * 1440) + " 分钟"
+          ? Math.round(plan.interval * 24) + " 小时"
           : plan.interval + " 天";
       }
       function renderCoverage() {
@@ -6593,6 +6688,8 @@
       let scenarioSession = null;
       let scenarioFeedback = "";
       let translationsVisible = true;
+      let wordCapture = null;
+      let voiceRefreshBound = false;
       const builders = new Map();
       const questionOrders = new Map();
       function esc(value) {
@@ -6634,6 +6731,8 @@
           completed: {},
           work: {},
           words: {},
+          customWords: {},
+          wordPractice: {},
           days: {},
           scenarios: {},
           notes: "",
@@ -6649,10 +6748,121 @@
           quizHistory: [],
           examProgress: {},
           lab: cleanLab(),
+          voice: { uri: "", rate: 0.84, pitch: 1 },
         };
       }
       function plain(value) {
         return !!value && typeof value === "object" && !Array.isArray(value);
+      }
+      function cleanSrsRecord(value) {
+        if (!plain(value) || !Number.isFinite(value.due) || value.due < 0)
+          return null;
+        return {
+          due: value.due,
+          interval: Number.isFinite(value.interval)
+            ? Math.min(Math.max(value.interval, 0), 180)
+            : 0,
+          reviews: Number.isInteger(value.reviews)
+            ? Math.min(Math.max(value.reviews, 0), 100000)
+            : 0,
+          lapses: Number.isInteger(value.lapses)
+            ? Math.min(Math.max(value.lapses, 0), 100000)
+            : 0,
+          ease: Number.isFinite(value.ease)
+            ? Math.min(3.5, Math.max(1.3, value.ease))
+            : 2.5,
+          streak: Number.isInteger(value.streak)
+            ? Math.min(100000, Math.max(0, value.streak))
+            : value.reviews > 0
+              ? 1
+              : 0,
+          last: Number.isFinite(value.last) && value.last >= 0 ? value.last : 0,
+        };
+      }
+      function cleanDailyExtra(value) {
+        const source = plain(value) ? value : {};
+        return {
+          shadow: Array.isArray(source.shadow)
+            ? source.shadow.slice(0, 3).map((item) => item === true)
+            : [],
+          grammarAnswers: Array.isArray(source.grammarAnswers)
+            ? source.grammarAnswers.slice(0, 2).map((answer) =>
+                plain(answer) && Number.isInteger(answer.choice)
+                  ? {
+                      choice: answer.choice,
+                      correct: answer.correct === true,
+                      resolved: answer.resolved === true,
+                      lastChoice: Number.isInteger(answer.lastChoice)
+                        ? answer.lastChoice
+                        : answer.choice,
+                    }
+                  : null,
+              )
+            : [],
+          drillIndex: Number.isInteger(source.drillIndex)
+            ? Math.max(0, Math.min(4, source.drillIndex))
+            : 0,
+          drillAnswers: Array.isArray(source.drillAnswers)
+            ? source.drillAnswers.slice(0, 4).map((answer) =>
+                plain(answer) && Number.isInteger(answer.choice)
+                  ? {
+                      choice: answer.choice,
+                      correct: answer.correct === true,
+                      resolved: answer.resolved === true,
+                      lastChoice: Number.isInteger(answer.lastChoice)
+                        ? answer.lastChoice
+                        : answer.choice,
+                      written:
+                        typeof answer.written === "string"
+                          ? answer.written.slice(0, 100)
+                          : "",
+                    }
+                  : null,
+              )
+            : [],
+          outputMode: source.outputMode === "speaking" ? "speaking" : "writing",
+          outputDraft:
+            typeof source.outputDraft === "string"
+              ? source.outputDraft.slice(0, 3000)
+              : "",
+          outputChecks: Array.isArray(source.outputChecks)
+            ? source.outputChecks.slice(0, 2).map((item) => item === true)
+            : [],
+          outputDone: source.outputDone === true,
+        };
+      }
+      function cleanCustomWords(value) {
+        const result = {};
+        if (!plain(value)) return result;
+        Object.entries(value)
+          .slice(0, 1000)
+          .forEach(([id, word]) => {
+            if (
+              !/^c-[a-z0-9-]{3,70}$/i.test(id) ||
+              !plain(word) ||
+              typeof word.it !== "string" ||
+              typeof word.zh !== "string" ||
+              !word.it.trim() ||
+              !word.zh.trim()
+            )
+              return;
+            result[id] = {
+              id,
+              it: word.it.trim().slice(0, 100),
+              zh: word.zh.trim().slice(0, 160),
+              context:
+                typeof word.context === "string"
+                  ? word.context.trim().slice(0, 500)
+                  : "",
+              source:
+                typeof word.source === "string" ? word.source.slice(0, 120) : "",
+              created:
+                typeof word.created === "string"
+                  ? word.created.slice(0, 40)
+                  : dateKey(),
+            };
+          });
+        return result;
       }
       function cleanRuleCheck(value) {
         const issues = Array.isArray(value?.issues)
@@ -6681,6 +6891,11 @@
           throw new Error("这不是当前版本的学习备份。");
         const clean = defaultState();
         clean.lab = cleanLab(value.lab);
+        clean.customWords = cleanCustomWords(value.customWords);
+        const studyWordIds = new Set([
+          ...vocabulary.map((word) => word.id),
+          ...Object.keys(clean.customWords),
+        ]);
         if (
           typeof value.created === "string" &&
           /^\d{4}-\d{2}-\d{2}$/.test(value.created)
@@ -6812,7 +7027,7 @@
               avoid: String(item.avoid || "").slice(0, 300),
               wordIds: Array.isArray(item.wordIds)
                 ? [
-                    ...new Set(item.wordIds.filter((id) => wordMap.has(id))),
+                    ...new Set(item.wordIds.filter((id) => studyWordIds.has(id))),
                   ].slice(0, 8)
                 : [],
               attempts: Number.isInteger(item.attempts)
@@ -6840,7 +7055,7 @@
           )
             ? [
                 ...new Set(
-                  value.adaptive.priorityWords.filter((id) => wordMap.has(id)),
+                  value.adaptive.priorityWords.filter((id) => studyWordIds.has(id)),
                 ),
               ].slice(0, 80)
             : [];
@@ -6859,30 +7074,28 @@
               };
             });
         vocabulary.forEach((word) => {
-          const w = plain(value.words) && value.words[word.id];
-          if (plain(w) && Number.isFinite(w.due) && w.due >= 0)
-            clean.words[word.id] = {
-              due: w.due,
-              interval: Number.isFinite(w.interval)
-                ? Math.min(Math.max(0, w.interval), 180)
-                : 0,
-              reviews: Number.isInteger(w.reviews)
-                ? Math.min(Math.max(0, w.reviews), 100000)
-                : 0,
-              lapses: Number.isInteger(w.lapses)
-                ? Math.min(Math.max(0, w.lapses), 100000)
-                : 0,
-              ease: Number.isFinite(w.ease)
-                ? Math.min(3.5, Math.max(1.3, w.ease))
-                : 2.5,
-              streak: Number.isInteger(w.streak)
-                ? Math.min(100000, Math.max(0, w.streak))
-                : w.reviews > 0
-                  ? 1
-                  : 0,
-              last: Number.isFinite(w.last) && w.last >= 0 ? w.last : 0,
-            };
+          const record = cleanSrsRecord(value.words?.[word.id]);
+          if (record) clean.words[word.id] = record;
         });
+        Object.keys(clean.customWords).forEach((id) => {
+          const record = cleanSrsRecord(value.words?.[id]);
+          if (record) clean.words[id] = record;
+        });
+        if (plain(value.wordPractice))
+          Object.entries(value.wordPractice)
+            .filter(([id]) => studyWordIds.has(id))
+            .slice(0, 1200)
+            .forEach(([id, entry]) => {
+              if (!plain(entry)) return;
+              clean.wordPractice[id] = {
+                draft:
+                  typeof entry.draft === "string" ? entry.draft.slice(0, 1000) : "",
+                answer: entry.answer === true,
+                lastChoice: Number.isInteger(entry.lastChoice)
+                  ? Math.max(-1, Math.min(20, entry.lastChoice))
+                  : -1,
+              };
+            });
         if (plain(value.days))
           Object.entries(value.days)
             .slice(-600)
@@ -6896,7 +7109,7 @@
               clean.days[key] = {
                 lessonId: d.lessonId,
                 review: Array.isArray(d.review)
-                  ? [...new Set(d.review.filter((id) => wordMap.has(id)))]
+                  ? [...new Set(d.review.filter((id) => studyWordIds.has(id)))].slice(0, 1000)
                   : [],
                 lesson: d.lesson === true,
                 scenario: d.scenario === true,
@@ -6920,6 +7133,7 @@
                 quizIndex: Number.isInteger(d.quizIndex)
                   ? Math.max(0, Math.min(2, d.quizIndex))
                   : 0,
+                extra: cleanDailyExtra(d.extra),
               };
             });
         scenarios.forEach((s, i) => {
@@ -6986,6 +7200,19 @@
               done: source.done === true,
             };
           });
+        if (plain(value.voice))
+          clean.voice = {
+            uri:
+              typeof value.voice.uri === "string"
+                ? value.voice.uri.slice(0, 500)
+                : "",
+            rate: Number.isFinite(value.voice.rate)
+              ? Math.min(1.2, Math.max(0.65, value.voice.rate))
+              : 0.84,
+            pitch: Number.isFinite(value.voice.pitch)
+              ? Math.min(1.3, Math.max(0.7, value.voice.pitch))
+              : 1,
+          };
         return clean;
       }
       function validDate(s) {
@@ -7037,7 +7264,12 @@
             quiz: false,
             quizAnswers: [],
             quizIndex: 0,
+            extra: cleanDailyExtra(),
           };
+          save();
+        }
+        if (!plain(state.days[key].extra)) {
+          state.days[key].extra = cleanDailyExtra();
           save();
         }
         return state.days[key];
@@ -7276,7 +7508,7 @@
       function rememberMistake(item) {
         if (!item || !item.kind) return;
         const wordIds = Array.isArray(item.wordIds)
-          ? [...new Set(item.wordIds.filter((id) => wordMap.has(id)))]
+          ? [...new Set(item.wordIds.filter((id) => getStudyWord(id)))]
           : [];
         const record = {
           kind: String(item.kind).slice(0, 40),
@@ -7367,7 +7599,7 @@
         const source = String(text || "").toLocaleLowerCase("it");
         const scoped = lessonMap.has(lessonId)
           ? lessonMap.get(lessonId).wordIds.map((id) => wordMap.get(id))
-          : vocabulary;
+          : allStudyWords();
         return scoped
           .filter((word) => source.includes(word.it.toLocaleLowerCase("it")))
           .map((word) => word.id)
@@ -7460,9 +7692,36 @@
           )
           .join("")}</div>`;
       }
+      function allStudyWords() {
+        return [
+          ...vocabulary,
+          ...Object.values(state.customWords || {}).map((word) => ({
+            ...word,
+            custom: true,
+          })),
+        ];
+      }
+      function getStudyWord(id) {
+        return wordMap.get(id) || state.customWords?.[id] || null;
+      }
+      function wordContext(word) {
+        if (!word) return "";
+        if (word.context) return word.context;
+        const lesson = word.lessonId ? lessonMap.get(word.lessonId) : null;
+        const line = lesson?.lines?.find((item) => item.toLocaleLowerCase("it").includes(word.it.toLocaleLowerCase("it")));
+        return line ? line.split("|")[1] : lesson?.build || "";
+      }
+      function memoryLevel(id) {
+        const record = state.words[id];
+        if (!record || !record.reviews) return { key: "new", label: "新加入" };
+        if (record.streak === 0 || record.due <= Date.now()) return { key: "learning", label: "需要再见" };
+        if (record.interval >= 45 && record.streak >= 5) return { key: "mastered", label: "长期掌握" };
+        if (record.interval >= 14 && record.streak >= 3) return { key: "stable", label: "稳定记忆" };
+        return { key: "familiar", label: "初步熟悉" };
+      }
       function dueWords() {
         const priority = state.adaptive?.priorityWords || [];
-        return vocabulary
+        return allStudyWords()
           .filter(
             (w) => state.words[w.id] && state.words[w.id].due <= Date.now(),
           )
@@ -7474,10 +7733,13 @@
       }
       function doneCount(day = getDay()) {
         return [
-          day.review.length >= 4,
+          day.review.length >= 8,
           day.lesson,
+          day.extra?.shadow?.filter(Boolean).length >= 3,
+          day.extra?.grammarAnswers?.length === 2 && day.extra.grammarAnswers.every((answer) => answer?.resolved),
           day.scenario,
-          day.quiz,
+          day.extra?.drillAnswers?.length === 4 && day.extra.drillAnswers.every((answer) => answer?.resolved),
+          day.extra?.outputDone === true,
         ].filter(Boolean).length;
       }
       function completedCount() {
@@ -7638,42 +7900,52 @@
           [
             "复习一下，再出发",
             due
-              ? `${due} 个词句到期 · 今天先练 4 张`
-              : "从 4 个基础词开始，建立间隔复习习惯",
+              ? `${due} 个词句到期 · 今天先练 8 张`
+              : "从 8 个基础词开始，建立间隔复习习惯",
             5,
             "review",
-            day.review.length >= 4,
+            day.review.length >= 8,
             "复习词卡",
           ],
+          ["听读跟练", "听 3 句今日材料，再跟着说一遍。", 4, "daily/shadow", day.extra?.shadow?.filter(Boolean).length >= 3, "开始跟练"],
           [
             `微课 · ${lesson.title}`,
             `单元 ${lesson.ui + 1} / 10 · 听读例句，自己排出一句话`,
-            10,
+            6,
             `lesson/${lesson.id}`,
             day.lesson,
             "开始微课",
           ],
+          ["语法应用", "用 2 道小题把今天的结构放进句子。", 4, "daily/grammar", day.extra?.grammarAnswers?.length === 2 && day.extra.grammarAnswers.every((answer) => answer?.resolved), "开始语法"],
           [
             "在真实情境中试一试",
             "从今天的短对话开始，练习合适的回应",
-            10,
+            4,
             `scenario/${scenarioForUnit[lesson.ui]}`,
             day.scenario,
             "进入情境",
           ],
           [
-            "用 3 道题检查理解",
-            "词义与阅读小测 · 错题会显示解释",
-            5,
-            "quiz",
-            day.quiz,
-            "开始小测",
+            "A2 快速题型",
+            "阅读、选词、匹配、听力各 1 题。",
+            4,
+            "daily/drill",
+            day.extra?.drillAnswers?.length === 4 && day.extra.drillAnswers.every((answer) => answer?.resolved),
+            "开始快练",
+          ],
+          [
+            "30 秒输出",
+            "写两句，或打开计时说一段自己的意大利语。",
+            3,
+            "daily/output",
+            day.extra?.outputDone === true,
+            "开始输出",
           ],
         ];
         const next = stages.findIndex((stage) => !stage[4]);
         const nextStage = stages[next] || stages[1];
         const metrics = [
-          ["今日任务", done, "/ 4 项"],
+          ["今日任务", done, "/ 7 项"],
           ["每天的小小投入", 30, "分钟 / 天"],
           ["已完成微课", completedCount(), "/ 40 节"],
           ["距离学习目标", daysRemaining(), "天"],
@@ -7724,8 +7996,8 @@
               </div>
             </div>
             <div class="progress-block">
-              <div class="progress-top"><strong>每一小步，都算数。</strong><span>${done} / 4</span></div>
-              ${progressTrack("今日完成任务", done, 4)}
+              <div class="progress-top"><strong>每一小步，都算数。</strong><span>${done} / 7</span></div>
+              ${progressTrack("今日完成任务", done, 7)}
               <p class="progress-note">目标 ${esc(state.targetDate)}。练习进度记录你的积累；听、说、读、写的实际表现，才是 A2 的检验。</p>
             </div>
           </aside>
@@ -7859,6 +8131,33 @@
             .join("")}</div>`
         );
       }
+      function memoryBadge(id) {
+        const level = memoryLevel(id);
+        return `<span class="memory-badge is-${level.key}">${level.label}</span>`;
+      }
+      function italianVoices() {
+        if (!("speechSynthesis" in window)) return [];
+        return window.speechSynthesis.getVoices().filter((voice) =>
+          voice.lang?.toLowerCase().startsWith("it"),
+        ).sort((a, b) => {
+          const rank = (voice) =>
+            (voice.lang.toLowerCase() === "it-it" ? 0 : 1) +
+            (voice.localService ? 0 : 2);
+          return rank(a) - rank(b) || a.name.localeCompare(b.name);
+        });
+      }
+      function renderVoiceSettings() {
+        const voices = italianVoices();
+        const selected = voices.find((voice) => voice.voiceURI === state.voice.uri);
+        const status = !("speechSynthesis" in window)
+          ? "此浏览器不支持语音合成。"
+          : selected
+            ? `${selected.name} · ${selected.lang}${selected.localService ? " · 本机语音" : " · 系统在线语音"}`
+            : voices.length
+              ? `已检测到 ${voices.length} 种意大利语音色。`
+              : "尚未检测到意大利语音色。请在设备的语音设置中安装意大利语，再重新打开本页。";
+        return `<section class="panel" style="margin-bottom:18px" aria-labelledby="voice-title"><div class="section-heading"><h2 id="voice-title">意大利语发音</h2><span>朗读音质由浏览器和设备语音包决定</span></div><div class="voice-grid"><label class="voice-field" for="italianVoice">语音<select id="italianVoice" class="select-field"><option value="">自动选择最佳意大利语音色</option>${voices.map((voice) => `<option value="${esc(voice.voiceURI)}" ${voice.voiceURI === state.voice.uri ? "selected" : ""}>${esc(voice.name)} · ${esc(voice.lang)}${voice.localService ? " · 本机" : ""}</option>`).join("")}</select></label><label class="voice-field" for="voiceRate">速度 <output id="voiceRateValue">${Number(state.voice.rate).toFixed(2)}×</output><input id="voiceRate" type="range" min="0.65" max="1.1" step="0.05" value="${state.voice.rate}"></label><label class="voice-field" for="voicePitch">音调 <output id="voicePitchValue">${Number(state.voice.pitch).toFixed(2)}</output><input id="voicePitch" type="range" min="0.75" max="1.25" step="0.05" value="${state.voice.pitch}"></label><button type="button" class="quiet-btn" data-action="say" data-text="Buongiorno, come stai? Mi chiamo Anna e studio italiano.">${icon("audio", 16)}试听</button></div><div class="voice-status ${selected ? "is-ready" : ""}" id="voiceStatus" role="status">${esc(status)}</div></section>`;
+      }
       function renderWords() {
         return (
           heading(
@@ -7872,43 +8171,79 @@
               true,
             ),
           ) +
-          `<div class="toolbar"><label class="sr-only" for="wordSearch">搜索意大利语或中文</label><input class="search-field" type="search" id="wordSearch" placeholder="搜索意大利语或中文…" value="${esc(wordSearch)}"><label class="sr-only" for="wordFilter">筛选词句</label><select class="select-field" id="wordFilter"><option value="all">全部 ${vocabulary.length} 个词句</option><option value="saved" ${wordFilter === "saved" ? "selected" : ""}>已加入复习</option><option value="due" ${wordFilter === "due" ? "selected" : ""}>到期词句</option>${units.map((u, i) => `<option value="${i}" ${wordFilter === String(i) ? "selected" : ""}>${i + 1}. ${esc(u.title)}</option>`).join("")}</select></div><div id="wordResults">${renderWordResults()}</div>`
+          `${renderVoiceSettings()}<div class="backup-row" style="margin:0 0 16px"><button type="button" class="primary-btn" data-action="go" data-path="words/add">${icon("spark", 16)}添加词句</button><span class="inline-note">在页面中选中意大利语词或短语，也可以直接加入。</span></div><div class="toolbar"><label class="sr-only" for="wordSearch">搜索意大利语或中文</label><input class="search-field" type="search" id="wordSearch" placeholder="搜索意大利语或中文…" value="${esc(wordSearch)}"><label class="sr-only" for="wordFilter">筛选词句</label><select class="select-field" id="wordFilter"><option value="all">全部 ${allStudyWords().length} 个词句</option><option value="saved" ${wordFilter === "saved" ? "selected" : ""}>已加入复习</option><option value="due" ${wordFilter === "due" ? "selected" : ""}>到期词句</option><option value="custom" ${wordFilter === "custom" ? "selected" : ""}>我的词条</option><option value="new" ${wordFilter === "new" ? "selected" : ""}>新加入</option><option value="learning" ${wordFilter === "learning" ? "selected" : ""}>需要再见</option><option value="familiar" ${wordFilter === "familiar" ? "selected" : ""}>初步熟悉</option><option value="stable" ${wordFilter === "stable" ? "selected" : ""}>稳定记忆</option><option value="mastered" ${wordFilter === "mastered" ? "selected" : ""}>长期掌握</option>${units.map((u, i) => `<option value="${i}" ${wordFilter === String(i) ? "selected" : ""}>${i + 1}. ${esc(u.title)}</option>`).join("")}</select></div><div id="wordResults">${renderWordResults()}</div>`
         );
       }
       function renderWordResults() {
         const search = wordSearch.trim().toLocaleLowerCase("it");
-        const words = vocabulary.filter(
+        const words = allStudyWords().filter(
           (w) =>
             (!search ||
-              `${w.it} ${w.zh}`.toLocaleLowerCase("it").includes(search)) &&
+              `${w.it} ${w.zh} ${wordContext(w)}`.toLocaleLowerCase("it").includes(search)) &&
             (wordFilter === "all" ||
               (wordFilter === "saved" && state.words[w.id]) ||
               (wordFilter === "due" && state.words[w.id]?.due <= Date.now()) ||
+              (wordFilter === "custom" && w.custom) ||
+              (["new", "learning", "familiar", "stable", "mastered"].includes(wordFilter) && memoryLevel(w.id).key === wordFilter) ||
               String(w.ui) === wordFilter),
         );
         if (!words.length)
           return '<div class="empty-state">没有匹配的词句。可以换个关键词，或选择“全部”。</div>';
-        return `<div class="inline-note" style="margin-bottom:12px">显示 ${words.length} 个词句 · 点 ♪ 试听设备提供的意大利语发音</div><div class="word-grid">${words.map((w) => `<article class="word-card"><div class="word-card-top"><div><div class="word-italian" lang="it">${esc(w.it)}</div><div class="word-chinese">${esc(w.zh)}</div></div>${audioButton(w.it)}</div><div class="word-meta"><button type="button" data-action="add-word" data-word="${w.id}">${state.words[w.id] ? "已加入复习 ✓" : "+ 加入复习"}</button></div></article>`).join("")}</div>`;
+        return `<div class="inline-note" style="margin-bottom:12px">显示 ${words.length} 个词句 · 选择卡片查看语境、记忆状态和额外练习</div><div class="word-grid">${words.map((w) => `<article class="word-card"><div class="word-card-top"><div><div class="word-italian" lang="it">${esc(w.it)}</div><div class="word-chinese">${esc(w.zh)}</div></div>${audioButton(w.it)}</div><div class="word-card-actions">${memoryBadge(w.id)}<button type="button" class="text-btn" data-action="add-word" data-word="${esc(w.id)}">${state.words[w.id] ? "已加入复习 ✓" : "+ 加入复习"}</button><button type="button" class="text-btn" data-action="open-word" data-word="${esc(w.id)}">语境与练习 ${icon("arrow", 13)}</button>${w.custom ? `<button type="button" class="text-btn" data-action="delete-custom-word" data-word="${esc(w.id)}" aria-label="删除 ${esc(w.it)}">删除</button>` : ""}</div>${wordContext(w) ? `<p class="word-card-context" lang="it">${esc(wordContext(w))}</p>` : ""}</article>`).join("")}</div>`;
+      }
+      function renderWordAdd() {
+        const capture = wordCapture || { it: "", context: "", source: "手动添加" };
+        return (
+          heading("PAROLA NUOVA", "把遇见的词，留在这里。", "填写词义和原句语境；新词会加入今天的复习队列。", btn("返回词句工坊", "go", 'data-path="words"')) +
+          `<section class="panel" style="max-width:760px"><label class="voice-field" for="customWordIt">意大利语词或短语<input class="search-field" id="customWordIt" maxlength="100" lang="it" value="${esc(capture.it)}" placeholder="例如：fare una passeggiata"></label><label class="voice-field" for="customWordZh" style="margin-top:14px">中文意思<input class="search-field" id="customWordZh" maxlength="160" value="${esc(capture.zh || "")}" placeholder="简洁写下词义"></label><label class="voice-field" for="customWordContext" style="margin-top:14px">语境例句或备注<textarea class="note-field" id="customWordContext" maxlength="500" lang="it" placeholder="可以保留完整句子，方便以后回想。">${esc(capture.context)}</textarea></label><label class="voice-field" for="customWordSource" style="margin-top:14px">来源<input class="search-field" id="customWordSource" maxlength="120" value="${esc(capture.source)}" placeholder="课程、书页或对话场景"></label><div class="backup-row" style="margin-top:18px"><button type="button" class="primary-btn" data-action="create-custom-word">加入词库并复习</button><button type="button" class="quiet-btn" data-action="go" data-path="words">取消</button></div><p class="inline-note">自定义词、语境、复习等级与例句练习都会包含在 JSON 备份中。</p></section>`
+        );
+      }
+      function wordExample(word) {
+        if (word.custom) return { it: word.context || word.it, zh: word.context ? "你保存的语境" : word.zh };
+        const lesson = lessonMap.get(word.lessonId);
+        const row = lesson?.lines?.map((line) => line.split("|")).find((parts) => parts[1]?.toLocaleLowerCase("it").includes(word.it.toLocaleLowerCase("it")));
+        return row ? { it: row[1], zh: row[2] } : { it: lesson?.build || word.it, zh: lesson?.meaning || word.zh };
+      }
+      function wordQuizChoices(word) {
+        const alternatives = allStudyWords()
+          .filter((item) => item.id !== word.id && item.zh !== word.zh)
+          .map((item) => item.zh);
+        const unique = [...new Set(alternatives)].slice(0, 3);
+        const choices = [word.zh, ...unique];
+        const shift = [...word.id].reduce((sum, char) => sum + char.charCodeAt(0), 0) % choices.length;
+        return [...choices.slice(shift), ...choices.slice(0, shift)];
+      }
+      function renderWord(id) {
+        const word = getStudyWord(id);
+        if (!word) return renderWords();
+        const record = state.words[id];
+        const practice = state.wordPractice[id] || { draft: "", answer: false, lastChoice: -1 };
+        const example = wordExample(word);
+        const lesson = word.lessonId ? lessonMap.get(word.lessonId) : null;
+        const choices = wordQuizChoices(word);
+        const nextDate = record ? new Date(record.due).toLocaleString("zh-CN", { timeZone: "Asia/Shanghai", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "加入词卡后安排";
+        return heading("PAROLA · RIPASSO", word.it, "把词放回语境里，再用自己的句子提取一次。", btn("返回词句工坊", "go", 'data-path="words"')) +
+          `<div class="word-detail-grid"><section class="word-detail-hero"><div class="word-italian" lang="it">${esc(word.it)}</div><div class="word-chinese">${esc(word.zh)}</div><div class="backup-row">${audioButton(word.it)}${memoryBadge(id)}<span class="tag">下次复习 · ${esc(nextDate)}</span></div><blockquote class="word-example"><p lang="it">${esc(example.it)}</p><p>${esc(example.zh)}</p></blockquote><div class="grammar-note" style="margin-top:16px"><strong>${word.custom ? "我的语境" : `延伸解释 · ${esc(lesson ? units[lesson.ui].title : "生活表达")}`}</strong><p>${esc(word.custom ? (word.source ? `来源：${word.source}。` : "这是你加入的自定义词条。") : (lesson?.note || "把这个词和刚才的完整句子一起记，注意它在场景里的位置与搭配。"))} ${word.custom ? "以后可在词库里继续编辑语境和来源。" : "先听完整句，再遮住中文回想意思；不要只凭单词表做孤立记忆。"}</p></div></section><section class="panel word-practice"><div class="eyebrow">EXTRA PRACTICE · 1</div><h2>不看答案，选出词义。</h2><p lang="it">${esc(example.it)}</p><div class="daily-choice-row">${choices.map((choice, index) => `<button type="button" class="daily-choice ${practice.answer && choice === word.zh ? "correct" : practice.lastChoice === index ? "wrong" : ""}" data-action="word-practice-answer" data-word="${esc(id)}" data-choice="${index}" ${practice.answer ? "disabled" : ""}>${esc(choice)}</button>`).join("")}</div><div class="feedback ${practice.answer ? "good" : practice.lastChoice >= 0 ? "bad" : ""}" role="status">${practice.answer ? "答对了。继续用这个词造一个自己的短句。" : practice.lastChoice >= 0 ? "再想一想句子里的线索，答对后可以继续。" : "选择意思后查看反馈。"}</div><label class="voice-field" for="wordSentence" style="margin-top:8px">用这个词写一句意大利语<textarea class="note-field" id="wordSentence" data-word-id="${esc(id)}" lang="it" maxlength="1000" placeholder="写一个和你自己有关的短句">${esc(practice.draft)}</textarea></label><button type="button" class="quiet-btn" data-action="save-word-sentence" data-word="${esc(id)}">保存我的例句</button>${lesson ? `<button type="button" class="text-btn" data-action="go" data-path="lesson/${lesson.id}">回到来源微课 ${icon("arrow", 13)}</button>` : ""}</section></div><section class="panel" style="margin-top:18px"><div class="section-heading"><h2>现在的记忆等级</h2><span>根据复习间隔和连续回忆动态更新</span></div><div class="backup-row">${[["again", "不会"], ["hard", "不熟"], ["familiar", "熟悉"], ["known", "稳定掌握"]].map(([rating, label]) => `<button type="button" class="${rating === "known" ? "primary-btn" : "quiet-btn"}" data-action="rate-word-detail" data-word="${esc(id)}" data-rating="${rating}">${label} · ${reviewIntervalLabel(id, rating)}</button>`).join("")}</div><p class="inline-note">间隔按回答情况动态安排；“不会”约 10 分钟后重见，“不熟”在 12 小时左右重见。时间仅是复习计划，不是记忆测量结果。</p></section>`;
       }
       function ensureReview() {
         if (reviewSession) return;
         let queue = dueWords()
-          .slice(0, 4)
+          .slice(0, 8)
           .map((w) => w.id);
-        if (queue.length < 4) {
+        if (queue.length < 8) {
           const todayLesson = lessonMap.get(getDay().lessonId);
           const nextLesson =
             lessons.find((l) => !state.completed[l.id]) || todayLesson;
           const newWords = [
             ...todayLesson.wordIds,
             ...(nextLesson?.wordIds || []),
-            ...vocabulary.filter((w) => !state.words[w.id]).map((w) => w.id),
+            ...allStudyWords().filter((w) => !state.words[w.id]).map((w) => w.id),
           ];
           for (const id of newWords)
             if (
               !queue.includes(id) &&
               !getDay().review.includes(id) &&
-              queue.length < 4
+              queue.length < 8
             )
               queue.push(id);
         }
@@ -7926,14 +8261,18 @@
             ) +
             `<div class="panel"><h2>已练习 ${s.queue.length} 张词卡</h2><p>“再学一次”会在 10 分钟后再次到期；其余选项会根据历史表现与连续回忆次数调整间隔。它是复习安排，不是考试分数。</p><div class="backup-row">${btn("进入今日微课", "go", `data-path="lesson/${getDay().lessonId}"`, true)}${btn("返回今日学习", "go", 'data-path="home"')}</div></div>`
           );
-        const word = wordMap.get(s.queue[s.index]);
+        const word = getStudyWord(s.queue[s.index]);
+        if (!word) {
+          s.index++;
+          return renderReview();
+        }
         return (
           heading(
             "RIPASSO · 约 5 分钟",
             "先想一想，再翻过来。",
             `第 ${s.index + 1} / ${s.queue.length} 张 · 试着回忆中文意思，并说一遍。`,
           ) +
-          `<div class="panel" style="max-width:720px"><div class="phrase-card" style="text-align:center;padding:45px 20px"><p class="phrase" lang="it">${esc(word.it)}</p><div style="margin-top:14px">${audioButton(word.it)}</div>${s.revealed ? `<p class="translation">${esc(word.zh)}</p>` : '<p class="translation">回想一下它的意思</p>'}</div>${!s.revealed ? `<div class="backup-row">${btn("翻开答案", "flip-card", "", true)}</div>` : `<div class="backup-row">${btn("再学一次 · 10 分钟", "rate-card", 'data-rating="again"')}${btn("有印象 · " + reviewIntervalLabel(word.id, "familiar"), "rate-card", 'data-rating="familiar"')}${btn("记住了 · " + reviewIntervalLabel(word.id, "known"), "rate-card", 'data-rating="known"', true)}</div>`}<p class="inline-note">${storageAvailable ? "记录会保存在当前浏览器。" : "当前浏览器未能保存，建议导出学习记录。"}</p></div>`
+          `<div class="panel" style="max-width:720px"><div class="phrase-card" style="text-align:center;padding:45px 20px"><p class="phrase" lang="it">${esc(word.it)}</p><div style="margin-top:14px">${audioButton(word.it)}</div>${s.revealed ? `<p class="translation">${esc(word.zh)}</p>` : '<p class="translation">回想一下它的意思</p>'}</div>${!s.revealed ? `<div class="backup-row">${btn("翻开答案", "flip-card", "", true)}</div>` : `<div class="backup-row">${btn("不会 · 10 分钟", "rate-card", 'data-rating="again"')}${btn("不熟 · " + reviewIntervalLabel(word.id, "hard"), "rate-card", 'data-rating="hard"')}${btn("熟悉 · " + reviewIntervalLabel(word.id, "familiar"), "rate-card", 'data-rating="familiar"')}${btn("稳定掌握 · " + reviewIntervalLabel(word.id, "known"), "rate-card", 'data-rating="known"', true)}</div>`}<p class="inline-note">${storageAvailable ? "记录会保存在当前浏览器。" : "当前浏览器未能保存，建议导出学习记录。"}</p></div>`
         );
       }
       function renderPractice() {
@@ -8110,6 +8449,8 @@
         if (!l) return renderHome();
         const w = workFor(id),
           done = !!state.completed[id];
+        const previousLesson = lessons[l.index - 1];
+        const nextLesson = lessons[l.index + 1];
         const dialog =
           renderMiniBoard(id) +
           l.lines
@@ -8131,7 +8472,7 @@
             `UNITÀ ${String(l.ui + 1).padStart(2, "0")} · MICRO LEZIONE ${String(l.li + 1).padStart(2, "0")}`,
             l.title,
             l.goal,
-            `<button type="button" class="text-btn" data-action="go" data-path="route">返回学习路线 →</button>`,
+            `<div class="lesson-nav-actions">${previousLesson ? `<button type="button" class="text-btn" data-action="go" data-path="lesson/${previousLesson.id}">上一课</button>` : ""}${nextLesson ? `<button type="button" class="text-btn" data-action="go" data-path="lesson/${nextLesson.id}">提前进入下一课 ${icon("arrow", 14)}</button>` : ""}<button type="button" class="text-btn" data-action="set-day-lesson" data-lesson="${l.id}">${getDay().lessonId === l.id ? "今日主课 ✓" : "设为今日主课"}</button><button type="button" class="text-btn" data-action="go" data-path="route">学习路线</button></div>`,
           ) +
           `<div class="lesson-layout"><section class="panel"><div class="section-heading"><h2>先听，再读一遍</h2><button type="button" class="text-btn" data-action="toggle-translation">${translationsVisible ? "隐藏中文" : "显示中文"}</button></div><div class="dialogue">${dialog}</div><div class="grammar-note" style="margin-top:16px"><strong>这一课的一点发现</strong><p>${esc(l.note)}</p></div>${renderLessonChecker(id, l)}<div class="section-heading" style="margin-top:22px"><h2>把词句排好</h2><span>点词加入句子；可点已选的词撤回</span></div><div class="phrase-card"><div class="eyebrow">${esc(l.meaning)}</div><div class="word-answer" aria-label="已选词句">${builder.selected.map((token) => `<button type="button" class="word-btn" data-action="remove-token" data-lesson="${id}" data-token="${token.index}">${esc(token.text)}</button>`).join("")}</div><div class="word-pool">${builder.tokens
             .filter(
@@ -8172,6 +8513,40 @@
             AVVISO: "通知",
           }[s] || s
         );
+      }
+      const dailyGrammar = [
+        { prompt: "___ chiamo Marco.", choices: ["Mi", "Me", "Mio"], correct: 0, note: "自我介绍用 Mi chiamo。" },
+        { prompt: "Vorrei ___ caffè, per favore.", choices: ["un", "una", "uno"], correct: 0, note: "caffè 是阳性名词，这里用 un。" },
+      ];
+      function dailyDrillItems() {
+        return [
+          examItems.reading[0],
+          examItems.cloze[0],
+          examItems.matching[0],
+          examItems.listening[0],
+        ];
+      }
+      function renderDaily(mode = "") {
+        const day = getDay();
+        const extra = day.extra;
+        const lesson = lessonMap.get(day.lessonId);
+        if (!["shadow", "grammar", "drill", "output"].includes(mode))
+          return heading("OGNI GIORNO · 30 MIN", "把七个小动作串起来。", "每日计划分成短而明确的回忆、输入、应用和输出；今天只需完成当前一项。", btn("返回今日学习", "go", 'data-path="home"', true)) +
+            `<div class="daily-grid"><article class="daily-card"><span class="tag">04 MIN</span><h3>听读跟练</h3><p>听今天材料中的 3 句，跟着说一遍。</p>${btn("开始跟练", "go", 'data-path="daily/shadow"')}</article><article class="daily-card"><span class="tag">04 MIN</span><h3>语法应用</h3><p>用 2 道小题把结构放进自己的句子。</p>${btn("开始语法", "go", 'data-path="daily/grammar"')}</article><article class="daily-card"><span class="tag">04 MIN</span><h3>A2 快速题型</h3><p>阅读、选词、匹配、听力各 1 题。</p>${btn("开始快练", "go", 'data-path="daily/drill"')}</article><article class="daily-card"><span class="tag">03 MIN</span><h3>30 秒输出</h3><p>写两句今天能用的话，或先说再写。</p>${btn("开始输出", "go", 'data-path="daily/output"')}</article></div>`;
+        if (mode === "shadow") {
+          const lines = lesson.lines.slice(0, 3).map((line) => line.split("|"));
+          return heading("ASCOLTA · 04 MIN", "听一句，再跟着说。", "先播放完整句，再遮住中文跟读。每句完成后点“我跟读了”。", btn("返回每日计划", "go", 'data-path="daily"')) + `<section class="panel"><div class="content-list">${lines.map((parts, index) => `<div class="content-row"><span class="content-index">0${index + 1}</span><div class="content-text"><strong lang="it">${esc(parts[1])}</strong><small>${esc(parts[2])}</small></div><div class="backup-row">${audioButton(parts[1])}<button type="button" class="${extra.shadow[index] ? "primary-btn" : "quiet-btn"}" data-action="daily-shadow" data-index="${index}">${extra.shadow[index] ? "已跟读 ✓" : "我跟读了"}</button></div></div>`).join("")}</div><div class="grammar-note"><strong>${extra.shadow.filter(Boolean).length} / 3 句已完成</strong><p>跟读不追求一次完美，重点是把重音、连读和句子节奏听出来。</p></div></section>`;
+        }
+        if (mode === "grammar") {
+          const answers = extra.grammarAnswers;
+          return heading("GRAMMATICA · 04 MIN", "把结构放进句子。", "先读完整句，再选择最自然的词。答错可以重试。", btn("返回每日计划", "go", 'data-path="daily"')) + `<section class="panel"><div class="lab-question-list">${dailyGrammar.map((item, index) => { const answer = answers[index]; const correct = answer?.resolved === true; return `<section class="lab-question"><h3 lang="it">${index + 1}. ${esc(item.prompt)}</h3><div class="choice-list">${item.choices.map((choice, choiceIndex) => `<button type="button" class="choice-btn ${answer?.lastChoice === choiceIndex ? (correct ? "correct" : "wrong") : ""}" data-action="daily-grammar-answer" data-index="${index}" data-choice="${choiceIndex}" ${correct ? "disabled" : ""}>${esc(choice)}</button>`).join("")}</div><div class="feedback ${answer ? (correct ? "good" : "bad") : ""}" role="status">${answer ? (correct ? esc(item.note) : "再读一遍句子，再试一次。") : "选择答案后查看提示。"}</div></section>`; }).join("")}</div><div class="grammar-note"><strong>${answers.filter((answer) => answer?.resolved).length} / 2 题已完成</strong><p>把正确结构替换到今天微课的例句里，再大声说一次。</p></div></section>`;
+        }
+        if (mode === "drill") {
+          const items = dailyDrillItems();
+          return heading("QUATTRO · 04 MIN", "A2 快速题型。", "四道短题各代表一种能力：读信息、选词、匹配和听力。", btn("返回每日计划", "go", 'data-path="daily"')) + `<section class="panel"><div class="daily-grid">${items.map((item, index) => { const answer = extra.drillAnswers[index]; const correct = answer?.resolved === true; return `<article class="daily-card ${correct ? "is-done" : ""}"><span class="tag">0${index + 1} · ${["阅读", "选词", "匹配", "听力"][index]}</span><h3>${esc(item.title)}</h3>${item.passage ? `<p lang="it">${esc(item.passage)}</p>` : item.audio ? `<div class="backup-row">${audioButton(item.audio, "播放听力")}</div>` : ""}<p><strong>${esc(item.prompt)}</strong></p><div class="daily-choice-row">${item.choices.map((choice, choiceIndex) => `<button type="button" class="daily-choice ${answer?.lastChoice === choiceIndex ? (correct ? "correct" : "wrong") : ""}" data-action="daily-drill-answer" data-index="${index}" data-choice="${choiceIndex}" ${correct ? "disabled" : ""}>${esc(choice)}</button>`).join("")}</div><div class="feedback ${answer ? (correct ? "good" : "bad") : ""}" role="status">${answer ? (correct ? esc(item.explanation) : "再定位时间、地点或人物信息，再试一次。") : "选一个答案。"}</div></article>`; }).join("")}</div><div class="grammar-note"><strong>${extra.drillAnswers.filter((answer) => answer?.resolved).length} / 4 题已完成</strong><p>短题做完后，回到题型训练可以继续完整四组练习。</p></div></section>`;
+        }
+        const draft = extra.outputDraft || "";
+        return heading("PRODUZIONE · 03 MIN", "把今天的词说成自己的话。", "写两句关于今天的计划、地点或喜好的意大利语；写完后朗读一遍。", btn("返回每日计划", "go", 'data-path="daily"')) + `<section class="panel" style="max-width:760px"><div class="eyebrow">PROMPT</div><h2>今天我……</h2><p class="inline-note">可以使用：${esc(lesson.build)} · ${esc(lesson.meaning)}</p><label class="sr-only" for="dailyOutputDraft">今日输出</label><textarea class="note-field" id="dailyOutputDraft" maxlength="3000" lang="it" placeholder="Oggi...\nMi piace...">${esc(draft)}</textarea><div class="backup-row"><button type="button" class="primary-btn" data-action="daily-output-save">保存并完成今日输出</button><button type="button" class="quiet-btn" data-action="say" data-text="${esc(draft || lesson.build)}">${icon("audio", 16)}听参考句</button></div><div class="grammar-note"><strong>${extra.outputDone ? "今日输出已记录 ✓" : "保存后计入今日计划"}</strong><p>这不是自动评分；写完后尝试脱稿说 30 秒，关注信息是否完整、句子是否连贯。</p></div></section>`;
       }
       function renderQuiz() {
         const day = getDay(),
@@ -8365,7 +8740,7 @@
             "把学习记录留在自己手里。",
             "当前页面没有账户；进度和写作草稿保存在本机浏览器。可以导出一份 JSON 备份。",
           ) +
-          `<div class="lesson-layout"><section class="panel"><h2>备考学习目标</h2><p>选择你希望学习到的日期。上海具体考试报名日期尚未纳入此页面，请以你选择的证书机构通知为准。</p><label for="targetDate" class="inline-note" style="display:block;margin-top:16px">学习目标日期</label><div class="backup-row"><input class="search-field" id="targetDate" type="date" value="${esc(state.targetDate)}" min="${dateKey()}">${btn("保存目标日期", "save-target", "", true)}</div><div class="grammar-note" style="margin-top:18px"><strong>${daysRemaining()} 天 · 约 ${Math.max(0, Math.ceil(daysRemaining() / 7))} 周 · 约 ${Math.round(daysRemaining() / 2)} 小时</strong><p>按每天 30 分钟估算。零基础在年底前稳定达到 A2 有难度。确认考试类型后，应加入对应的官方样题与真人听力。</p></div><div class="content-list"><div class="content-row"><span class="content-index">01</span><div class="content-text"><strong>课程完成数</strong><small>只记录完成过句子排序的微课，不折算为能力级别。</small></div><span class="tag">${completedCount()} / 40</span></div><div class="content-row"><span class="content-index">02</span><div class="content-text"><strong>浏览器保存状态</strong><small>${storageAvailable ? "本地保存可用" : "本地保存不可用，请尽快导出备份"}</small></div><span class="tag ${storageAvailable ? "" : "coral"}">${storageAvailable ? "本机" : "需备份"}</span></div></div></section><aside class="panel"><h2>备份与恢复</h2><p>备份包含微课完成情况、词卡复习计划、自评和写作草稿。导出文件由你自行保存。</p><div class="backup-row">${btn("导出 JSON 备份", "export", "", true)}${btn("从 JSON 恢复", "import")}</div><p class="inline-note">恢复会以备份内容替换当前浏览器中的学习记录。确认之后才会导入。</p><div class="sidebar-rule" style="margin:22px 0 18px"></div><h3>每天 30 分钟</h3><p>5 分钟复习、10 分钟微课、10 分钟情境练习、5 分钟自测。右上角可以开始或暂停计时，离开页面时会自动暂停。</p><p class="inline-note">任务完成由实际练习触发。口语、写作目前使用自评清单。</p><h3 style="margin-top:20px">发音与后续备考</h3><p class="inline-note">♪ 使用设备提供的意大利语合成语音；没有意大利语音色时会提示。离线可学习全部文字内容，部分系统音色需要联网。</p><p class="inline-note">A2 能力描述可参考 <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions" target="_blank" rel="noopener noreferrer">欧洲委员会 CEFR 等级说明</a>。本页是练习材料，尚未核实上海考位或报名日程。</p></aside></div>`
+          `<div class="lesson-layout"><section class="panel"><h2>备考学习目标</h2><p>选择你希望学习到的日期。上海具体考试报名日期尚未纳入此页面，请以你选择的证书机构通知为准。</p><label for="targetDate" class="inline-note" style="display:block;margin-top:16px">学习目标日期</label><div class="backup-row"><input class="search-field" id="targetDate" type="date" value="${esc(state.targetDate)}" min="${dateKey()}">${btn("保存目标日期", "save-target", "", true)}</div><div class="grammar-note" style="margin-top:18px"><strong>${daysRemaining()} 天 · 约 ${Math.max(0, Math.ceil(daysRemaining() / 7))} 周 · 约 ${Math.round(daysRemaining() / 2)} 小时</strong><p>按每天 30 分钟估算。零基础在年底前稳定达到 A2 有难度。确认考试类型后，应加入对应的官方样题与真人听力。</p></div><div class="content-list"><div class="content-row"><span class="content-index">01</span><div class="content-text"><strong>课程完成数</strong><small>只记录完成过句子排序的微课，不折算为能力级别。</small></div><span class="tag">${completedCount()} / 40</span></div><div class="content-row"><span class="content-index">02</span><div class="content-text"><strong>浏览器保存状态</strong><small>${storageAvailable ? "本地保存可用" : "本地保存不可用，请尽快导出备份"}</small></div><span class="tag ${storageAvailable ? "" : "coral"}">${storageAvailable ? "本机" : "需备份"}</span></div></div></section><aside class="panel"><h2>备份与恢复</h2><p>备份包含微课进度、自定义词条、记忆等级、每日练习、语音偏好和例句草稿。导出文件由你自行保存。</p><div class="backup-row">${btn("导出 JSON 备份", "export", "", true)}${btn("从 JSON 恢复", "import")}</div><p class="inline-note">恢复会以备份内容替换当前浏览器中的学习记录。确认之后才会导入。</p><div class="sidebar-rule" style="margin:22px 0 18px"></div><h3>每天 30 分钟</h3><p>8 张词卡、听读跟练、微课、语法应用、情境对话、四种快题和短输出。各任务时间合计 30 分钟；计数由实际动作触发。</p><p class="inline-note">可以打开“今日学习”查看七项进度。写作与口语使用自评，不会自动评分。</p><h3 style="margin-top:20px">发音与后续备考</h3><p class="inline-note">词句工坊可选择意大利语音色并调节语速、音调。浏览器只使用设备已提供的意大利语音色；没有时会显示安装提示，不会改用其他语言的发音。</p><p class="inline-note">A2 能力描述可参考 <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions" target="_blank" rel="noopener noreferrer">欧洲委员会 CEFR 等级说明</a>。本页是练习材料，尚未核实上海考位或报名日程。</p></aside></div>`
         );
       }
       let renderedPath = "";
@@ -8374,8 +8749,10 @@
         const path = (location.hash || "#home").slice(1),
           [page, arg] = path.split("/");
         const active =
-          page === "lesson" || page === "review" || page === "quiz"
+          page === "lesson" || page === "review" || page === "quiz" || page === "daily"
             ? "home"
+            : page === "word"
+              ? "words"
             : ["exam", "output", "official"].includes(page)
               ? "exam"
               : ["grammar", "coverage"].includes(page)
@@ -8398,7 +8775,9 @@
         if (page === "home") main.innerHTML = renderHome();
         else if (page === "route") {
           main.innerHTML = renderRoute();
-        } else if (page === "words") main.innerHTML = renderWords();
+        } else if (page === "words") main.innerHTML = arg === "add" ? renderWordAdd() : renderWords();
+        else if (page === "word") main.innerHTML = renderWord(arg);
+        else if (page === "daily") main.innerHTML = renderDaily(arg || "");
         else if (page === "review") main.innerHTML = renderReview();
         else if (page === "practice") main.innerHTML = renderPractice();
         else if (page === "scenario")
@@ -8432,7 +8811,7 @@
             .querySelector(".page-head")
             ?.insertAdjacentHTML("afterend", renderLabLinks());
         }
-        if (page === "words") {
+        if (page === "words" && !arg) {
           const input = document.getElementById("wordSearch");
           if (input)
             input.addEventListener("input", (event) => {
@@ -8446,6 +8825,32 @@
               wordFilter = event.target.value;
               document.getElementById("wordResults").innerHTML =
                 renderWordResults();
+            });
+        }
+        if (page === "word") {
+          const sentence = document.getElementById("wordSentence");
+          if (sentence)
+            sentence.addEventListener("input", (event) => {
+              const id = event.target.dataset.wordId;
+              state.wordPractice[id] = state.wordPractice[id] || { draft: "", answer: false, lastChoice: -1 };
+              state.wordPractice[id].draft = event.target.value.slice(0, 1000);
+              save();
+            });
+        }
+        if (page === "words" && !arg) {
+          if (!voiceRefreshBound && "speechSynthesis" in window) {
+            voiceRefreshBound = true;
+            window.speechSynthesis.addEventListener("voiceschanged", () => {
+              if (document.getElementById("italianVoice")) render();
+            });
+          }
+        }
+        if (page === "daily" && arg === "output") {
+          const draft = document.getElementById("dailyOutputDraft");
+          if (draft)
+            draft.addEventListener("input", (event) => {
+              getDay().extra.outputDraft = event.target.value.slice(0, 3000);
+              save();
             });
         }
         if (page === "skills") {
@@ -8546,19 +8951,21 @@
             setTimeout(finish, 900);
           });
         }
-        const available = window.speechSynthesis.getVoices();
-        if (!available.some((v) => v.lang.toLowerCase().startsWith("it"))) {
+        const available = italianVoices();
+        if (!available.length) {
           toast(
-            "当前设备没有检测到意大利语语音。可以继续看文字；安装意大利语语音后即可试听。",
+            "当前设备没有检测到意大利语语音。请在系统语音设置中安装意大利语；本页不会用其他语言的声音代替。",
           );
           return;
         }
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = "it-IT";
-        utterance.rate = 0.88;
         utterance.voice =
-          available.find((v) => v.lang.toLowerCase().startsWith("it")) || null;
+          available.find((voice) => voice.voiceURI === state.voice.uri) ||
+          available[0];
+        utterance.lang = utterance.voice.lang || "it-IT";
+        utterance.rate = Number(state.voice.rate) || 0.84;
+        utterance.pitch = Number(state.voice.pitch) || 1;
         utterance.onerror = (event) => {
           if (!["interrupted", "canceled"].includes(event.error))
             toast("这次朗读未能播放。请检查设备的意大利语音色与网络后重试。");
@@ -8692,17 +9099,25 @@
       function rateWord(rating) {
         const s = reviewSession;
         if (!s || !s.revealed || s.index >= s.queue.length) return;
-        const wid = s.queue[s.index],
-          old = state.words[wid] || { due: 0, interval: 0, reviews: 0 };
-        const plan = repetitionPlan(old, rating);
-        if (!plan) return;
-        state.words[wid] = plan;
+        const wid = s.queue[s.index];
+        rateStudyWord(wid, rating);
         const day = getDay();
-        if (!day.review.includes(wid)) day.review.push(wid);
-        markComplete(day);
         s.index++;
         s.revealed = false;
         render();
+      }
+      function rateStudyWord(id, rating) {
+        if (!getStudyWord(id)) return false;
+        const plan = repetitionPlan(
+          state.words[id] || { due: 0, interval: 0, reviews: 0 },
+          rating,
+        );
+        if (!plan) return false;
+        state.words[id] = plan;
+        const day = getDay();
+        if (!day.review.includes(id)) day.review.push(id);
+        save();
+        return true;
       }
       function beginScenario(index) {
         scenarioSession = {
@@ -8722,7 +9137,7 @@
         scenarioFeedback = "";
       }
       function addWord(id) {
-        const w = wordMap.get(id);
+        const w = getStudyWord(id);
         if (!w) return;
         state.words[id] = state.words[id] || {
           due: Date.now(),
@@ -8731,6 +9146,51 @@
         };
         save();
         toast(`${w.it} 已加入今天的词卡。`);
+        render();
+      }
+      function createCustomWord() {
+        const it = document.getElementById("customWordIt")?.value.trim();
+        const zh = document.getElementById("customWordZh")?.value.trim();
+        if (!it || !zh) {
+          toast("请填写意大利语词条和中文意思。" );
+          return;
+        }
+        const duplicate = allStudyWords().find((word) => word.it.toLocaleLowerCase("it") === it.toLocaleLowerCase("it"));
+        if (duplicate) {
+          state.words[duplicate.id] = state.words[duplicate.id] || {
+            due: Date.now(), interval: 0, reviews: 0, lapses: 0, ease: 2.5, streak: 0, last: 0,
+          };
+          wordCapture = null;
+          save();
+          toast(`${duplicate.it} 已在词库中，现已加入复习。`);
+          go(`word/${duplicate.id}`);
+          return;
+        }
+        const id = `c-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+        state.customWords[id] = {
+          id,
+          it: it.slice(0, 100),
+          zh: zh.slice(0, 160),
+          context: document.getElementById("customWordContext")?.value.trim().slice(0, 500) || "",
+          source: document.getElementById("customWordSource")?.value.trim().slice(0, 120) || "",
+          created: new Date().toISOString(),
+        };
+        state.words[id] = { due: Date.now(), interval: 0, reviews: 0, lapses: 0, ease: 2.5, streak: 0, last: 0 };
+        state.wordPractice[id] = { draft: "", answer: false, lastChoice: -1 };
+        wordCapture = null;
+        save();
+        toast(`${it} 已加入词库并安排复习。`);
+        go("words");
+      }
+      function deleteCustomWord(id) {
+        if (!state.customWords[id] || !confirm("删除这个自定义词条及其复习记录？")) return;
+        delete state.customWords[id];
+        delete state.words[id];
+        delete state.wordPractice[id];
+        state.adaptive.priorityWords = (state.adaptive.priorityWords || []).filter((item) => item !== id);
+        Object.values(state.days).forEach((day) => { day.review = (day.review || []).filter((item) => item !== id); });
+        state.mistakes.forEach((item) => { item.wordIds = (item.wordIds || []).filter((itemId) => itemId !== id); });
+        save();
         render();
       }
       function exportData() {
@@ -8848,6 +9308,150 @@
         }
         if (action === "say") {
           speak(button.dataset.text || "");
+          return;
+        }
+        if (action === "capture-selection") {
+          wordCapture = { it: selectedItalianText, context: selectedItalianContext, source: "页面选词" };
+          go("words/add");
+          return;
+        }
+        if (action === "set-day-lesson") {
+          const lesson = lessonMap.get(button.dataset.lesson);
+          if (!lesson) return;
+          const day = getDay();
+          if (day.lessonId !== lesson.id) {
+            day.lessonId = lesson.id;
+            day.lesson = state.completed[lesson.id] === dateKey();
+            day.quiz = false;
+            day.quizIndex = 0;
+            day.quizAnswers = [];
+          }
+          save();
+          toast(`今天的主课已设为：${lesson.title}。`);
+          render();
+          return;
+        }
+        if (action === "create-custom-word") {
+          createCustomWord();
+          return;
+        }
+        if (action === "delete-custom-word") {
+          deleteCustomWord(button.dataset.word);
+          return;
+        }
+        if (action === "open-word") {
+          go(`word/${button.dataset.word}`);
+          return;
+        }
+        if (action === "word-practice-answer") {
+          const id = button.dataset.word;
+          const word = getStudyWord(id);
+          const practice = state.wordPractice[id] || { draft: "", answer: false, lastChoice: -1 };
+          const choice = Number(button.dataset.choice);
+          const choices = wordQuizChoices(word);
+          if (!word || practice.answer || !choices[choice]) return;
+          const correct = choices[choice] === word.zh;
+          practice.lastChoice = choice;
+          practice.answer ||= correct;
+          state.wordPractice[id] = practice;
+          save();
+          render();
+          return;
+        }
+        if (action === "save-word-sentence") {
+          const id = button.dataset.word;
+          const practice = state.wordPractice[id] || { draft: "", answer: false, lastChoice: -1 };
+          practice.draft = document.getElementById("wordSentence")?.value.slice(0, 1000) || "";
+          state.wordPractice[id] = practice;
+          save();
+          toast("你的例句已保存在词条练习里。" );
+          return;
+        }
+        if (action === "rate-word-detail") {
+          if (rateStudyWord(button.dataset.word, button.dataset.rating)) {
+            toast("记忆等级已更新，下一次复习时间已安排。" );
+            render();
+          }
+          return;
+        }
+        if (action === "daily-shadow") {
+          const day = getDay();
+          const index = Number(button.dataset.index);
+          if (index >= 0 && index < 3) day.extra.shadow[index] = !day.extra.shadow[index];
+          save();
+          render();
+          return;
+        }
+        if (action === "daily-grammar-answer") {
+          const day = getDay();
+          const index = Number(button.dataset.index);
+          const choice = Number(button.dataset.choice);
+          const item = dailyGrammar[index];
+          if (!item || day.extra.grammarAnswers[index]?.resolved) return;
+          const first = day.extra.grammarAnswers[index];
+          day.extra.grammarAnswers[index] = {
+            choice: first?.choice ?? choice,
+            correct: first?.correct ?? (choice === item.correct),
+            resolved: choice === item.correct,
+            lastChoice: choice,
+          };
+          save();
+          render();
+          return;
+        }
+        if (action === "daily-drill-answer") {
+          const day = getDay();
+          const index = Number(button.dataset.index);
+          const choice = Number(button.dataset.choice);
+          const item = dailyDrillItems()[index];
+          if (!item || day.extra.drillAnswers[index]?.resolved) return;
+          const first = day.extra.drillAnswers[index];
+          const correct = choice === item.correct;
+          day.extra.drillAnswers[index] = {
+            choice: first?.choice ?? choice,
+            correct: first?.correct ?? correct,
+            resolved: correct,
+            lastChoice: choice,
+            written: "",
+          };
+          if (correct)
+            resolveMistake(
+              "exam",
+              "",
+              0,
+              `daily-${index}`,
+              -1,
+              ["reading", "cloze", "matching", "listening"][index],
+            );
+          if (!correct)
+            rememberMistake({
+              kind: `daily-${index}`,
+              source: "exam",
+              examMode: ["reading", "cloze", "matching", "listening"][index],
+              questionIndex: 0,
+              topic: `每日快练 · ${["阅读", "选词", "匹配", "听力"][index]}`,
+              original: item.choices[choice],
+              corrected: item.choices[item.correct],
+              reason: item.explanation,
+              avoid: "用题干和材料中的关键词定位答案。",
+              wordIds: relatedWordIds(item.audio || item.passage || item.prompt),
+            });
+          save();
+          render();
+          return;
+        }
+        if (action === "daily-output-save") {
+          const day = getDay();
+          day.extra.outputDraft = document.getElementById("dailyOutputDraft")?.value.slice(0, 3000) || "";
+          if (italianWordCount(day.extra.outputDraft) < 4) {
+            toast("至少写出 4 个意大利语词，再完成今日输出。" );
+            save();
+            return;
+          }
+          day.extra.outputDone = true;
+          save();
+          toast("今日输出已保存。试着不看草稿再说一遍。" );
+          render();
           return;
         }
         if (action === "toggle-unit") {
@@ -9137,9 +9741,53 @@
       );
       document.addEventListener("change", (event) => {
         handleLabChange(event.target);
+        if (event.target.id === "italianVoice") {
+          state.voice.uri = event.target.value;
+          save();
+          render();
+        }
+        if (event.target.id === "voiceRate") {
+          state.voice.rate = Number(event.target.value);
+          const output = document.getElementById("voiceRateValue");
+          if (output) output.textContent = `${state.voice.rate.toFixed(2)}×`;
+          save();
+        }
+        if (event.target.id === "voicePitch") {
+          state.voice.pitch = Number(event.target.value);
+          const output = document.getElementById("voicePitchValue");
+          if (output) output.textContent = state.voice.pitch.toFixed(2);
+          save();
+        }
         if (event.target.id === "importFile") {
           importData(event.target.files?.[0]);
           event.target.value = "";
+        }
+      });
+      let selectedItalianText = "";
+      let selectedItalianContext = "";
+      document.getElementById("selectionPopover").addEventListener("mousedown", (event) => {
+        if (event.target.closest("button")) event.preventDefault();
+      });
+      document.addEventListener("selectionchange", () => {
+        const selection = window.getSelection();
+        const text = selection?.toString().trim() || "";
+        const anchorElement = selection?.anchorNode?.nodeType === 1 ? selection.anchorNode : selection?.anchorNode?.parentElement;
+        const focusElement = selection?.focusNode?.nodeType === 1 ? selection.focusNode : selection?.focusNode?.parentElement;
+        const italianNode = anchorElement?.closest('#main [lang="it"]');
+        const focusItalianNode = focusElement?.closest('#main [lang="it"]');
+        const popover = document.getElementById("selectionPopover");
+        const preview = document.getElementById("selectedTextPreview");
+        if (!popover || !preview) return;
+        if (text && text.length <= 60 && italianNode && focusItalianNode === italianNode) {
+          selectedItalianText = text;
+          selectedItalianContext = italianNode.textContent.trim();
+          preview.textContent = text;
+          const rect = selection.getRangeAt(0).getBoundingClientRect();
+          popover.style.left = `${Math.min(Math.max(10, rect.left), window.innerWidth - 220)}px`;
+          popover.style.top = `${Math.max(10, rect.top - 58)}px`;
+          popover.hidden = false;
+        } else {
+          popover.hidden = true;
         }
       });
       document
